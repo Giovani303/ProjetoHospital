@@ -1,4 +1,8 @@
 package model;
 
-public class NivelEmergencia {
+public enum NivelEmergencia {
+    LEVE,
+    MODERADO,
+    URGENTE,
+    CRITICO
 }

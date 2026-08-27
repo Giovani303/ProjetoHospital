@@ -1,24 +1,20 @@
 package service;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalDouble;
-
 import model.NivelEmergencia;
 import model.Paciente;
 
 public class Hospital {
 
-    private final List<Paciente> pacientes = new ArrayList<>();
-
+private final List<Paciente> pacientes = new ArrayList<>();
 
     public void admitir(Paciente p) {
         pacientes.add(p);
     }
-
 
     public List<Paciente> getPacientes() {
         return Collections.unmodifiableList(pacientes);

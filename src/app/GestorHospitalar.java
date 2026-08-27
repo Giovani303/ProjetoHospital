@@ -1,8 +1,6 @@
 package app;
-
 import java.util.List;
 import java.util.Scanner;
-
 import model.NivelEmergencia;
 import model.Paciente;
 import service.Hospital;
@@ -19,7 +17,6 @@ public class GestorHospitalar {
             exibirMenu();
             var opcao = scanner.nextLine();
 
-
             executando = switch (opcao) {
                 case "1" -> { execAdmissao(); yield true; }
                 case "2" -> { execTriagemGeral(); yield true; }
@@ -30,7 +27,6 @@ public class GestorHospitalar {
             };
         }
     }
-
     private static void exibirMenu() {
         System.out.println("\n=== SISTEMA DE GESTÃO HOSPITALAR E TRIAGEM ===");
         System.out.println("1. Admitir Paciente");
@@ -41,34 +37,25 @@ public class GestorHospitalar {
         System.out.print("Escolha uma opção: ");
     }
 
-
     private static void execAdmissao() {
         try {
             System.out.print("Nome do Paciente: ");
             var nome = scanner.nextLine();
-
             System.out.print("Idade: ");
             var idade = Integer.parseInt(scanner.nextLine());
-
             System.out.print("Nível de Emergência (LEVE, MODERADO, URGENTE, CRITICO): ");
             var nivel = NivelEmergencia.valueOf(scanner.nextLine().trim().toUpperCase());
-
             System.out.print("Possui Plano de Saúde? (S/N): ");
             var possuiPlano = scanner.nextLine().trim().equalsIgnoreCase("S");
-
             var novoPaciente = new Paciente(nome, idade, nivel, possuiPlano);
             hospital.admitir(novoPaciente);
-
             System.out.println("Paciente admitido com sucesso!");
         } catch (IllegalArgumentException e) {
             System.out.println("Erro ao admitir paciente: " + e.getMessage());
         }
     }
-
-
     private static void execTriagemGeral() {
         List<Paciente> emergenciais = hospital.listarEmergenciais();
-
         if (emergenciais.isEmpty()) {
             System.out.println("Nenhum paciente em estado urgente ou crítico no momento.");
         } else {
@@ -83,9 +70,7 @@ public class GestorHospitalar {
     private static void execEstatisticas() {
         var mediaIdadeCriticos = hospital.calcularMediaIdadeCriticos();
         var totalSegurados = hospital.contarSegurados();
-
         System.out.println("--- Painel de Estatísticas ---");
-
         mediaIdadeCriticos.ifPresentOrElse(
                 media -> System.out.printf("Média de idade dos casos CRÍTICOS: %.2f anos%n", media),
                 () -> System.out.println("Não há pacientes em estado CRÍTICO para calcular a média.")
@@ -93,7 +78,6 @@ public class GestorHospitalar {
 
         System.out.printf("Total de pacientes segurados (com plano): %d%n", totalSegurados);
     }
-
 
     private static void execBuscaAvancada() {
         var pacienteMaisIdoso = hospital.buscarPacienteMaisIdoso();

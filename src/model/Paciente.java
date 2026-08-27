@@ -1,8 +1,6 @@
 package model;
 
-
 public record Paciente(String nome, int idade, NivelEmergencia nivel, boolean possuiPlano) {
-
 
     public Paciente {
         if (nome == null || nome.isBlank()) {
